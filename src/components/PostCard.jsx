@@ -3,19 +3,17 @@ import appwriteService from "../appwrite/config"
 import {Link} from 'react-router-dom'
 
 function PostCard({$id, title, featuredImage}) {
-    //Debugging
-        // console.log("PostCard featuredImage:", featuredImage);
     return(
-        <Link to={`/post/${$id}`}>
-            <div className='w-full bg-gray-100 rounded-xl p-4'>
-                <div className='w-full justify-center mb-4'>
+        <Link to={`/post/${$id}`} className="block h-full">
+            <div className='w-full bg-white rounded-xl p-4 h-full flex flex-col'>
+                <div className='w-full justify-center mb-4 flex-grow'>
                     <img 
                     src={appwriteService.getFileView(featuredImage)} 
                     alt ={title}
-                    className='rounded-xl'/>
+                    className='rounded-xl w-full h-full object-cover'/>
                 </div>
                 <h2
-                className='text-xl font-bold'
+                className='text-xl font-bold text-center'
                 >{title}</h2>
             </div>
         </Link>

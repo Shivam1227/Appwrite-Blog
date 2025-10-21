@@ -9,12 +9,17 @@ function Home() {
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
-        appwriteService.getPosts().then((posts) => {
-            if(posts){
-                setPosts(posts.documents)
+        if (authStatus) {
+            appwriteService.getPosts().then((posts) => {
+            if (posts) {
+                setPosts(posts.documents);
             }
-        })
-    }, [])
+        });
+        } else {
+            setPosts([]);
+        }
+    }, [authStatus]);
+
 
     const user = authService.getCurrentUser();
 

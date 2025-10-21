@@ -4,7 +4,7 @@ import Logo from '../Logo'
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden py-8 bg-gray-400 border border-t-2 border-t-black">
+    <section className="relative overflow-hidden py-8 bg-white border border-t-2 border-t-black">
             <div className="relative z-10 mx-auto max-w-7xl px-4">
                 <div className="-m-6 flex flex-wrap">
                     <div className="w-full p-6 md:w-1/2 lg:w-5/12">
@@ -14,12 +14,12 @@ function Footer() {
                                     <img 
                                         src="/Logo.jpg" 
                                         alt="Logo"
-                                        className="w-12" // You can make the footer logo a bit bigger
+                                        className="w-16 border-2 border-[#ffa880dd] rounded-4xl shadow-[0_0_15px_5px_rgba(255,168,128,0.7)]" // You can make the footer logo a bit bigger
                                     />
                                 </div>
                             </div>
                             <div>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-gray-900">
                                     &copy; Copyright 2025. All Rights Reserved by DevUI.
                                 </p>
                             </div>
