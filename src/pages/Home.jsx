@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import appwriteService from "../appwrite/config"
 import { Container, PostCard } from '../components';
 import authService from '../appwrite/auth';
@@ -11,15 +11,14 @@ function Home() {
     useEffect(() => {
         if (authStatus) {
             appwriteService.getPosts().then((posts) => {
-            if (posts) {
-                setPosts(posts.documents);
-            }
-        });
+                if (posts) {
+                    setPosts(posts.documents);
+                }
+            });
         } else {
             setPosts([]);
         }
     }, [authStatus]);
-
 
     const user = authService.getCurrentUser();
 
@@ -29,8 +28,8 @@ function Home() {
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500 justify-center">
-                                {authStatus ?  "No posts Available" : "Login to read posts"}
+                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                                {authStatus ? "No posts Available" : "Login to read posts"}
                             </h1>
                         </div>
                     </div>
@@ -38,10 +37,11 @@ function Home() {
             </div>
         )
     }
+
     return (
         <div className='w-full py-8'>
             <Container>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-4'>
                     {posts.map((post) => (
                         <PostCard 
                             key={post.$id}
@@ -52,7 +52,6 @@ function Home() {
             </Container>
         </div>
     )
-
 }
 
 export default Home;

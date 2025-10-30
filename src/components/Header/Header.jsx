@@ -1,14 +1,12 @@
 import React from 'react';
-// 1. Import useLocation hook
-import { useLocation }from 'react-router-dom'; 
-import { Container, Logo, LogoutBtn } from '../index'
+import { useLocation } from 'react-router-dom'; 
+import { Logo, LogoutBtn } from '../index'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const authStatus = useSelector((state) => state.auth.status)
     const navigate = useNavigate()
-    // Get the current location
     const location = useLocation();
 
     const navItems = [
@@ -19,7 +17,7 @@ function Header() {
         },
         {
             name: "Login",
-            slug: "/login", // Changed from ./login to /login
+            slug: "/login",
             active: !authStatus,
         },
         {
@@ -34,29 +32,29 @@ function Header() {
         },
         {
             name: "Add Post",
-            slug: "/add-post", // Changed from add-post to /add-post
+            slug: "/add-post",
             active: authStatus,
         },
     ]
 
     return (
-        <header className='py-3 shadow bg-white'>
-
-            <nav className='flex w-full px-4 items-center'>
-                <div className='mr-4'>
-                    <Logo width='70px' />
+        <header className='py-3 shadow bg-white w-full'>
+            <nav className='flex items-center justify-between w-full px-4 sm:px-6 md:px-8 lg:px-12'>
+                <div className='flex-shrink-0'>
+                    <Logo width='50px' />
                 </div>
-                <ul className='flex ml-auto items-center'>
+                <ul className='flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end'>
                     {navItems.map((item) =>
                         item.active ? (
                             <li key={item.name}>
                                 <button
                                     onClick={() => navigate(item.slug)}
-                                    // 2. Dynamically change button background color
-                                    className={`inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full
-                                    ${location.pathname === item.slug ? "bg-blue-100" : ""}
+                                    className={`inline-block px-2 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 text-[10px] sm:text-xs md:text-sm lg:text-base duration-200 hover:bg-blue-100 rounded-full whitespace-nowrap
+                                        ${location.pathname === item.slug ? "bg-blue-100" : ""}
                                     `}
-                                >{item.name}</button>
+                                >
+                                    {item.name}
+                                </button>
                             </li>
                         ) : null
                     )}
