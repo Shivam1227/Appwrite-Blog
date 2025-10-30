@@ -49,7 +49,7 @@ function Header() {
                             <li key={item.name}>
                                 <button
                                     onClick={() => navigate(item.slug)}
-                                    className={`inline-block px-2 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 text-[10px] sm:text-xs md:text-sm lg:text-base duration-200 hover:bg-blue-100 rounded-full whitespace-nowrap
+                                    className={`inline-block px-2.5 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2 text-[13px] sm:text-xs md:text-sm lg:text-base duration-200 hover:bg-blue-100 rounded-full whitespace-nowrap
                                         ${location.pathname === item.slug ? "bg-blue-100" : ""}
                                     `}
                                 >
