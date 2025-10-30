@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import {Button, Input, Select, RTE} from '../index'
-import appwriteService from "../../appwrite/config.js?v=5"
+import appwriteService from "../../appwrite/config.js"
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ export default function PostForm({post}) {
     const titleValue = watch('title');
 
     const submit = async (data) => {
-        if(post) {           //This is for updating the existing post
+        if(post) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
 
             if(file){
@@ -64,8 +64,6 @@ export default function PostForm({post}) {
 
     }, [])
 
-
-    // Add this useEffect hook to watch for the 'post' prop
     useEffect(() => {
         if (post) {
             reset(post);
@@ -79,16 +77,14 @@ export default function PostForm({post}) {
 
     }, [titleValue, slugTransform, setValue])
 
-
-    // PostForm.jsx
-
     const onError = (errors) => {
         console.error("Form validation failed:", errors);
     };
 
     return(
         <form onSubmit={handleSubmit(submit, onError)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+            {/* Main Content Section - Full width on mobile, 2/3 on desktop */}
+            <div className="w-full lg:w-2/3 px-2 mb-6 lg:mb-0">
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -104,9 +100,16 @@ export default function PostForm({post}) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE 
+                    label="Content :" 
+                    name="content" 
+                    control={control} 
+                    defaultValue={getValues("content")} 
+                />
             </div>
-            <div className="w-1/3 px-2">
+
+            {/* Sidebar Section - Full width on mobile, 1/3 on desktop */}
+            <div className="w-full lg:w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
@@ -117,7 +120,7 @@ export default function PostForm({post}) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                               src={appwriteService.getFileView(post.featuredImage)}
+                            src={appwriteService.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -129,7 +132,11 @@ export default function PostForm({post}) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button 
+                    type="submit" 
+                    bgColor={post ? "bg-green-500" : undefined} 
+                    className="w-full"
+                >
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>
